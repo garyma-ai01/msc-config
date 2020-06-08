@@ -1,7 +1,7 @@
 spring:
   profiles:
    active:
-   - dev
+   - test
 ---
 server:
   port: 8201
@@ -10,9 +10,14 @@ spring:
   application:
    name: microservicecloud-config-client
 eureka:
-  client:
-    service-url:
-      defaultZone: http://eureka-dev.com:7001/eureka/
+  client: #客户端注册进eureka服务列表内
+    service-url: 
+      #defaultZone: http://localhost:7001/eureka
+      # 将该service注册到集群eureka中
+       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/      
+  instance:
+    instance-id: dev-micserver-dept-provider-from-github-config-8001   # 在eureka中显示对应的服务名字
+    prefer-ip-address: true     #在eureka中下边的访问路径可以显示IP地址
 ---
 server:
   port: 8203
@@ -21,6 +26,11 @@ spring:
   application:
    name: microservicecloud-config-client
 eureka:
-  client:
-    service-url:
-      defaultZone: http://eureka-test.com:7001/eureka/
+  client: #客户端注册进eureka服务列表内
+    service-url: 
+      #defaultZone: http://localhost:7001/eureka
+      # 将该service注册到集群eureka中
+       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/      
+  instance:
+    instance-id: test-micserver-dept-provider-from-github-config-8001   # 在eureka中显示对应的服务名字
+    prefer-ip-address: true     #在eureka中下边的访问路径可以显示IP地址
